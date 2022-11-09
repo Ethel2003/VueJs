@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,td,th{
+            border:2px solid black;
+            border-collapse: collapse;
+            padding: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form action="" method="POST">
+            <div>
+                <label for="email">Email</label> 
+                <input type="email" id="email" v-model = "user_mail" v-if="true">
+            </div> 
+            <span class="email" >Mail:{{user_mail}}</span> 
+            <div>
+                <label for="pass">Password</label> 
+                <input type="password" id="pass" v-model="user_pwd"> 
+            </div>
+            <span class="password" >Pwd:{{user_pwd}}</span> 
+            <div>
+                <label for="phone">Phone</label> 
+                <input type="tel" id="phone" v-model="user_phone" > 
+            <span class="phone" >Tél:{{user_phone}}</span> 
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+        <ul>
+            <li v-for="tache of arr">{{tache}}</li>
+        </ul>
+        
+        <!-- <ul>
+            <li v-for="el in objet">{{el}}</li>
+        </ul> -->
+        <table>
+            <thead>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Age</th>
+            </thead>
+            <tbody>
+                <tr v-for="val of tablobjet">
+                    <td>{{val.fname}}</td>
+                    <td>{{val.lname}}</td>
+                    <td>{{val.age}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vue = new Vue({
+            data: {
+                user_mail: '',
+                user_pwd: '',
+                user_phone: '',
+                arr: ['item','item 1', 'item 2', 'item 3'],
+                tablobjet: [
+                    {fname:"Tabo",lname:"Cam",age:"25ans"},
+                    {fname:"Cocouvi",lname:"Ama",age:"24ans"},
+                    {fname:"Konan",lname:"Nani",age:"30ans"},
+                    {fname:"Anou",lname:"Lola",age:"21ans"},
+                    {fname:"Akan",lname:"Ayé",age:"30ans"},
+                    {fname:"Bami",lname:"Ola",age:"35ans"},
+                    {fname:"Ayin",lname:"Bonté",age:"16ans"},
+                    {fname:"Kolawolé",lname:"Precious",age:"27ans"},
+                ]
+            },
+        }).$mount("#app");
+    </script>
+</body>
+</html>

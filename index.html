@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <title>VueJs</title>
+</head>
+<body>
+    <!-- Instance racine qui va comporter l'instance de Vue.Elle peut prendre deux valeurs comme id: root ou app -->
+    <div id="app">
+        <p>Hello {{user}}</p> 
+        <!-- cette syntaxe {{element}} est utilisé pour écrire du JS dans le html et pour lier également les données définies dans le Vue avec l'element dans la moustache    -->
+        <h1>Todo App</h1>
+        <form action="#">
+            <input type="text" name="search" id="search" v-model="input">
+            <input type="submit" value="Envoyer">
+            <p>La valeur de la variable input est:{{input}}</p>
+        </form>
+    </div>
+    <!-- Instance d'un objet Vue qui nous permettra d'avoir toutes les fonctionnalités associés -->
+    <script>
+        // const app = document.getElementById("app");
+        const vue = new Vue({
+            el:"#app", //el==> option utilisée pour lier la div ayant l'id app
+            // template: `<div>
+            //         <h1>Hello Vue Js!</h1>
+            //         <p>It's the first time I used Vue.</p>
+            //         <h3>{{msg}}</h3>
+            //         </div> `,
+            //template est une option utilisée pour définir le markup(html) de la page.Le template ne doit avoir qu'un seul parent. 
+            data: {
+                user:'Marcos',
+                msg:"Welcome to home",
+                input:"",
+            },
+            //C'est une option permettant de stocker toutes les données que nous voulons utiliser dans notre html
+        });
+        /**
+         * Directive Vue ==> est un mot clé que l'on écrit dans  le html et qui permet de demander à vue d'effectuer des actions précises. La plupart des  directives commencent par v- (v de vue). 
+         * 
+         * v-model est un edirective qui demande à vue de prendre la valeur dans un champ de saisie et de la stocker dzns une variable 
+         * 
+         * v-html est une  directive qui demande à vue d'interpoler le texte contenu dans la variable qu'on lui passe tout en considérant les tags.
+         *
+         * v-text est une  directive qui demande à vue d'interpoler le texte contenu dans la variable qu'on lui fournit littéralement sans tenir compte des balises.
+         * 
+         * Pour lier l'instance root à l'instance de Vue, on peut procéder comme suit:
+         *  const vue = new Vue({ 
+            data: {
+            }
+            }).$mount("#root");
+
+         * v-if qui permet d'afficher le contenu si la condition fournie est vraie;
+         * v-else qui permet d'executer une instruction si la condition fournie est fausse;
+         * Ces deux conditions sont plus utiles pour faire de l'affichage  
+         * v-for qui permet de parcourir un tableau ou des objets
+         **/
+    </script>
+</body>
+</html>
