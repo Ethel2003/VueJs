@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script> -->
+    <script src="vue.global.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header style="display:flex; justify-content:space-around; align-items: center; background-image:linear-gradient(#ebe3db,#ebe3db,#ffff 7%);">
+            <div v-bind:style="div_style">
+                <a v-bind:href="div_a"><img v-bind:src="logo.source" v-bind:alt="logo.attribut" :style="img_style"></a>
+                <h1>{{title_head}}</h1>
+            </div>
+            <nav>
+                <ul v-bind:style="ul_style">
+                    <li v-for="(value,i) of links " v-bind:key="i"  ><a v-bind:href="value.href"  v-bind:style="li_style">{{value.title}}</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <script>
+        const vue =  Vue.createApp({
+            // el:'#app',
+            data(){
+                return{
+                div_a:"index_freshly.html",
+                logo:{source:'logo.png', attribut:"logo"},
+                links:[
+                    {title:"Home",href:"home.html"},
+                    {title:"About",href:"about.html"},
+                    {title:"Menus",href:"menu.html"},
+                    {title:"Contact",href:"contact.html"},
+                ],
+                title_head:"*FRESHLY RESTAURANT*",
+                div_style:"display:flex; align-items:center;",
+                ul_style:"list-style:none;display:flex; justify-content:space-around; gap:.5rem; font-size:bold; color:",
+                li_style:"text-decoration:none; border",
+                img_style:"width:230px;max-width:100%;min-width:130px",
+            
+                    }
+            },
+        }).mount("#app")
+    </script>
+</body>
+</html>

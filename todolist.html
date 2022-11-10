@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <script src="vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form action="#" @submit.prevent="addTodo">
+            <input type="text" v-model="newTodo">
+            <button>Add Todo</button>
+        </form>
+
+        <ul>
+            <li v-for="todo in todos" :key="todo.id">{{todo.text}}
+                <button @click="removeTodo(todo)">X</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let id = 0;
+        const vue = Vue.createApp({
+            data(){
+                return{
+                    newTodo:'',
+                    todos:[
+                        {id:id++, text:'Learn HTML'},
+                        {id:id++, text:'Learn JavaScript'},
+                        {id:id++, text:'Learn Vue'},
+                    ]
+                }
+            },
+
+            methods:{
+                addTodo(){
+                    this.todos.push({id:id++, text:this.newTodo});
+                    this.newTodo = '';
+                },
+
+                removeTodo(todo){
+                    this.todos = this.todos.filter((Todo)=> Todo !== todo);
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
