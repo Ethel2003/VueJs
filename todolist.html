@@ -6,19 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <script src="vue.global.js"></script>
+    <style>
+        .done{
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <form action="#" @submit.prevent="addTodo">
-            <input type="text" v-model="newTodo">
+            <input type="text" v-model = "newTodo">
             <button>Add Todo</button>
         </form>
 
         <ul>
-            <li v-for="todo in todos" :key="todo.id">{{todo.text}}
+            <li v-for="todo in filteredTodo" :key="todo.id">
+                <input type="checkbox" v-model="todo.done">
+                <span :class="{done:todo.done}">{{todo.text}}</span>
                 <button @click="removeTodo(todo)">X</button>
             </li>
         </ul>
+
+        <button @click="hideCompleted =!hideCompleted, filteredTodo">{{hideCompleted? 'Show all':'Hide Completed'}}</button>
     </div>
 
     <script>
@@ -27,11 +36,13 @@
             data(){
                 return{
                     newTodo:'',
+                    hideCompleted: false,
                     todos:[
-                        {id:id++, text:'Learn HTML'},
-                        {id:id++, text:'Learn JavaScript'},
-                        {id:id++, text:'Learn Vue'},
-                    ]
+                        {id:id++, text:'Learn HTML',done:true},
+                        {id:id++, text:'Learn JavaScript',done:true},
+                        {id:id++, text:'Learn Vue',done:false},
+                    ],
+                    newTodos:[],
                 }
             },
 
@@ -43,9 +54,31 @@
 
                 removeTodo(todo){
                     this.todos = this.todos.filter((Todo)=> Todo !== todo);
-                }
-            }
+                },
+            },
+
+            computed:{
+                
+                // filteredTodo(){
+                //     if (this.hideCompleted) {
+                //         this.newTodos=this.todos;
+                //         return this.todos = this.todos.filter((Todo)=> Todo.done==false);
+                //     } else {
+                //         return this.todos = this.newTodos;
+                //     } 
+                // },
+                filteredTodo(){
+                    if (this.hideCompleted) {
+                        // this.newTodos=this.todos;
+                        return this.todos.filter((Todo)=> Todo.done==false);
+                    } else {
+                        return this.todos;
+                    } 
+                },
+            },
+
         }).mount("#app");
     </script>
 </body>
 </html>
+Je m'appelle Brunice Padonou
