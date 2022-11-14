@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App </title>
+    <script src="https://kit.fontawesome.com/b48549a02e.js" crossorigin="anonymous"></script>
+    <script src="vue.global.js"></script>
+    <style>
+        *,
+        *::after,
+        *::before{
+            box-sizing: border-box;
+        }
+
+        body{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            color:black;
+        }
+
+        #app{
+            margin:5rem;
+            padding: 5rem;
+            width:800px;
+            background-color: #90bcd8;
+        }
+
+        form{
+            display:flex;
+            gap:.5rem;
+            justify-content: center;
+        }
+
+        input{
+            padding: .5rem;
+            /* width:150px; */
+            border-radius: 5px;
+            border:none;
+        }
+        
+        ul{
+            list-style: none;
+            border:1px solid black;
+            border-radius:5px;
+            padding: 0;
+            background-color: #ffff;
+        }
+
+        li{
+            border: 1px solid black;
+            padding: .5rem;
+            margin:1rem;
+            border-radius:5px;
+            position:relative;
+        }
+
+        li>button{
+            position:absolute;
+            left:90%;
+        }
+
+        button[type="submit"]{
+            border-radius:5px;
+            background-color: 
+            ;
+        }
+
+        h2{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>My Todo App</h2>
+        <form action="#" @submit.prevent="addTask">
+            <input type="text" v-model="newTask">
+            <button type="submit" >Add a task</button>
+        </form>
+
+        <ul>
+            <li v-for="(task,i) in filterTask" v-bind:key="i">
+                <input type="checkbox"> {{task.text}}
+                <button @click="deleteTask(task)"><i class="fas fa-trash"></i></button>
+            </li>
+        </ul>
+
+        <button @click="hideCompleted=!hideCompleted">{{hideCompleted?"Show All":"Hide Completed"}}</button>
+    </div>
+
+    <script>
+        let index = 0;
+    
+        const vue = Vue.createApp({
+            data() {
+                return {
+                    newTask: "",
+                    tasks : [
+                        {id:index++,text:"Go to Highfive.",done:false},
+                        {id:index++,text:"Go to the market.",done:false},
+                        {id:index++,text:"Wash my clothes.",done:true},
+                    ],
+                    count:0,
+                    hideCompleted:false,
+                }
+            },
+
+            methods: {
+                addTask(){
+                    this.tasks.push({id:index++,text:this.newTask});
+                    this.newTask = "";
+                    this.counter();
+                },
+
+                deleteTask(task){
+                    this.tasks = this.tasks.filter((el)=>el!==task);
+                },
+
+                counter(){
+                    this.count++;
+                    console.log(this.count);
+                }
+            },
+
+            watch:{
+                count(newcount){
+                    alert("New Task added!!");
+                }
+            },
+
+            computed:{
+                filterTask(){
+                    if(this.hideCompleted){
+                        return this.tasks.filter((el)=>el.done==false);
+                    }
+                    else{
+                        return this.tasks;
+                    }
+                },
+            },
+        }).mount("#app");
+    </script>
+</body>
+</html>
